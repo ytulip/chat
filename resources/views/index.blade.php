@@ -25,6 +25,10 @@
 <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="/asset/layui/layui.js"></script>
 <script>
+        var pageConfig =
+        {
+            socketServer:'{{env('SOCKET_SERVER')}}'
+        };
         var socket;
         var ping;
         function sendMessage(socket, data){
@@ -71,7 +75,7 @@
             });
             //监听自定义工具栏点击，以添加代码为例
             //建立websocket连接
-            socket = new WebSocket('ws://127.0.0.1:9501?sessionid={{ $sessionid }}');
+            socket = new WebSocket( pageConfig.socketServer + '?sessionid={{ $sessionid }}');
             socket.onopen = function(){
                 console.log("websocket is connected")
                 ping = setInterval(function () {
